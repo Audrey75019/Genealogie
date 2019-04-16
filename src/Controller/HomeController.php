@@ -4,7 +4,10 @@
 namespace App\Controller;
 
 
+use App\Entity\Personne;
+use App\Form\RechercheType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -76,11 +79,27 @@ class HomeController extends AbstractController
      * @Route("/rechercher/rechercher-ancetre")
      * @return Response
      */
-    public function rechercherAncetre(): Response
+    public function rechercherAncetre(int $id, Request $request): Response
     {
+        $repo = $this->getDoctrine()->getRepository(Personne::class);
+        $personne = $repo->findOneBy([
+            'id' => $id
+        ]);
+        $form = $this->createForm(RechercheType::class, $personne);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager = $this->getDoctrine()->getManager();
+            $manager->flush();
+            return $this->render('rechercher-ancetre.html.twig', [
+                'personne' => $personne,
+                'editForm' => $form->createView()
+            ]);
+        }
+
         return $this->render('/rechercher-ancetre.html.twig');
     }
     /**
+     * @param int $id
      * @Route("/rechercher/rechercher-esclave")
      * @return Response
      */

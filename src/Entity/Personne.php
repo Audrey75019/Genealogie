@@ -56,7 +56,13 @@ class Personne
     public function __construct()
     {
         $this->passe = new ArrayCollection();
-
+    }
+    /**
+     * @return mixed
+     */
+    public function __toString()
+    {
+        return $this->name;
     }
 
     public function getId(): ?int

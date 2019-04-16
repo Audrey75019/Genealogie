@@ -37,4 +37,5 @@ class Matricule
 
         return $this;
     }
+
 }

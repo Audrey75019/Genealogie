@@ -33,6 +33,14 @@ class FaitNotable
         $this->lieu = new ArrayCollection();
     }
 
+    /**
+     * @return mixed
+     */
+    public function __toString()
+    {
+        return $this->fait;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

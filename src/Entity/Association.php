@@ -34,6 +34,9 @@ class Association
         $this->personnes = new ArrayCollection();
     }
 
+    /**
+     * @return mixed
+     */
     public function getId(): ?int
     {
         return $this->id;

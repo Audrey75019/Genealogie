@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>Liste des utilisateurs</h1>
+
+    <ul>
+        {% for fos_user in users %}
+            <li>
+                {{ fos_user.username }}
+                <a href="{{ path('app_user_editrole', {id: fos_user.id}) }}">Modifier le rôle</a>
+                <a href="{{ path('app_admin_list', {id: fos_user.id}) }}">Supprimer le profil</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

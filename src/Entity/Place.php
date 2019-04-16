@@ -53,6 +53,13 @@ class Place
         $this->faitNotables = new ArrayCollection();
         $this->personnes = new ArrayCollection();
     }
+    /**
+     * @return mixed
+     */
+    public function __toString()
+    {
+        return $this->city;
+    }
 
     public function getId(): ?int
     {

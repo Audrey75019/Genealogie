@@ -14,4 +14,13 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+
+    /**
+     * @return mixed
+     */
+    public function __toString()
+    {
+        return $this->username;
+    }
+
 }
