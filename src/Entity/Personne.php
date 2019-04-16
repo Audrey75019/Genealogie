@@ -48,6 +48,11 @@ class Personne
      */
     private $passe;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Association", inversedBy="personnes")
+     */
+    private $avoir;
+
     public function __construct()
     {
         $this->passe = new ArrayCollection();
@@ -141,6 +146,18 @@ class Personne
         if ($this->passe->contains($passe)) {
             $this->passe->removeElement($passe);
         }
+
+        return $this;
+    }
+
+    public function getAvoir(): ?Association
+    {
+        return $this->avoir;
+    }
+
+    public function setAvoir(?Association $avoir): self
+    {
+        $this->avoir = $avoir;
 
         return $this;
     }
