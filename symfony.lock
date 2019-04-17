@@ -136,6 +136,9 @@
     "friendsofsymfony/user-bundle": {
         "version": "v2.1.2"
     },
+    "fzaninotto/faker": {
+        "version": "v1.8.0"
+    },
     "gedmo/doctrine-extensions": {
         "version": "v2.4.37"
     },
@@ -186,6 +189,9 @@
     },
     "psr/simple-cache": {
         "version": "1.0.1"
+    },
+    "pugx/autocompleter-bundle": {
+        "version": "v1.4.2"
     },
     "sensio/framework-extra-bundle": {
         "version": "5.2",

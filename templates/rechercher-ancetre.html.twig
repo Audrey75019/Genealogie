@@ -6,9 +6,11 @@
 
 {% block body %}
 <h1>rechercher un ancetre</h1>
-    {{ form_start(createForm) }}
-    {{ form_widget(createForm) }}
-    <input type="submit" value="Modifier" class="btn btn-outline-primary">
-    {{ form_end(createForm) }}
-
+    <div class="jumbotron">
+        <div class="container">
+    {{ form_start(form) }}
+            <input type="submit" value="Rechercher" class="btn btn-outline-primary">
+    {{ form_end(form) }}
+        </div>
+    </div>
 {% endblock %}

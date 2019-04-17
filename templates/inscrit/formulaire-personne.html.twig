@@ -2,10 +2,10 @@
 
 {% block body %}
 <h1>Formulaire de création de personne</h1>
-    {{ form_start(createForm) }}
-    {{ form_widget(createForm) }}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
     <input type="submit" value="Créer" class="btn btn-outline-primary">
-    {{ form_end(createForm) }}
+    {{ form_end(form) }}
 
 {% endblock %}
 

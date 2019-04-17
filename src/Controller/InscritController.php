@@ -47,4 +47,13 @@ class InscritController extends AbstractController
             'createForm' => $form->createView()
         ]);
     }
+
+    /**
+     * @Route("/inscrit/connecte")
+     * @return Response
+     */
+    public function connecte()
+    {
+        return $this->render('/inscrit/connecte.html.twig');
+    }
 }

@@ -5,7 +5,10 @@ namespace App\Controller;
 
 
 use App\Entity\Personne;
+use App\Entity\PropertySearch;
+use App\Form\PropertySearchType;
 use App\Form\RechercheType;
+use App\Repository\PersonneRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -79,33 +82,29 @@ class HomeController extends AbstractController
      * @Route("/rechercher/rechercher-ancetre")
      * @return Response
      */
-    public function rechercherAncetre(int $id, Request $request): Response
+    public function rechercherAncetre(Request $request): Response
     {
-        $repo = $this->getDoctrine()->getRepository(Personne::class);
-        $personne = $repo->findOneBy([
-            'id' => $id
-        ]);
-        $form = $this->createForm(RechercheType::class, $personne);
+        $search = new PropertySearch();
+        $form = $this->createForm(PropertySearchType::class, $search);
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $manager = $this->getDoctrine()->getManager();
-            $manager->flush();
-            return $this->render('rechercher-ancetre.html.twig', [
-                'personne' => $personne,
-                'createForm' => $form->createView()
-            ]);
-        }
 
 
-        return $this->render('/rechercher-ancetre.html.twig');
+        return $this->render('/rechercher-ancetre.html.twig', [
+            'form'=>$form->createView()
+        ]);
     }
     /**
      * @param int $id
      * @Route("/rechercher/rechercher-esclave")
      * @return Response
      */
-    public function rechercherEsclave(): Response
+    public function rechercherEsclave(Request $request): Response
     {
+        $search = new PropertySearch();
+        $form = $this->createForm(PropertySearchType::class, $search);
+        $form->handleRequest($request);
+
+
         return $this->render('/rechercher-esclave.html.twig');
     }
     /**
@@ -151,12 +150,34 @@ class HomeController extends AbstractController
         return $this->render('/modifier-arbre.html.twig');
     }
 
+    /**
+     * @Route("/forum")
+     * @return Response
+     */
     public function forum(): Response
     {
         return $this->render('/forum.html.twig');
     }
+
+    /**
+     * @Route("/entraide")
+     * @return Response
+     */
     public function associationEntraide(): Response
     {
         return $this->render('/entraide.html.twig');
+    }
+
+    /**
+     * @Route("/liste")
+     * @return Response
+     */
+    public function liste(PersonneRepository $repository)
+    {
+        $repository = $this->getDoctrine()->getRepository( Personne::class);
+        $personnes = $repository->findAll();
+        return $this->render('/liste.html.twig', [
+            'personnes' => $personnes
+        ]);
     }
 }
