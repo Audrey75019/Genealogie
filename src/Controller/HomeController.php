@@ -92,9 +92,10 @@ class HomeController extends AbstractController
             $manager->flush();
             return $this->render('rechercher-ancetre.html.twig', [
                 'personne' => $personne,
-                'editForm' => $form->createView()
+                'createForm' => $form->createView()
             ]);
         }
+
 
         return $this->render('/rechercher-ancetre.html.twig');
     }

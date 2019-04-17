@@ -1,11 +1,11 @@
 easy_admin:
   site_name: "Roots"
-#entities:
-#FaitNotable:
-#- App\Entity\FaitNotable
-#Matricule:
-#- App\Entity\Matricule
-#Personne:
-#- App\Entity\Personne
-#User:
-#- App\Entity\User
+  entities:
+    FaitNotable:
+      class: App\Entity\FaitNotable
+    Matricule:
+      class: App\Entity\Matricule
+    Personne:
+      class: App\Entity\Personne
+    User:
+      class: App\Entity\User
