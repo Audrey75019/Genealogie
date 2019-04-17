@@ -3,12 +3,12 @@
 
 namespace App\Controller;
 
-
 use App\Entity\Personne;
 use App\Entity\PropertySearch;
 use App\Form\PropertySearchType;
 use App\Form\RechercheType;
 use App\Repository\PersonneRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -168,16 +168,4 @@ class HomeController extends AbstractController
         return $this->render('/entraide.html.twig');
     }
 
-    /**
-     * @Route("/liste")
-     * @return Response
-     */
-    public function liste(PersonneRepository $repository)
-    {
-        $repository = $this->getDoctrine()->getRepository( Personne::class);
-        $personnes = $repository->findAll();
-        return $this->render('/liste.html.twig', [
-            'personnes' => $personnes
-        ]);
-    }
 }

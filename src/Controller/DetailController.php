@@ -11,16 +11,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class DetailController extends AbstractController
 {
     /**
-     * @Route("/{id}", name="article_list")
+     * @Route("/liste")
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function liste()
     {
         // Récupération du Repository
         $repository = $this->getDoctrine()->getRepository(Personne::class);
         // Récupération des articles
-        $articles = $repository->findAll();
+        $personnes = $repository->findAll();
         return $this->render('liste.html.twig', [
-            'articles' => $articles
+            'personnes' => $personnes
         ]);
     }
     /**
