@@ -6,6 +6,7 @@
         <ul>
             {% for personne in personnes %}
                 <li>{{ personne.name }}</li>
+                <a href="{{ path('app_inscrit_create', {id: personne.id }) }}">Détail</a>
             {% endfor %}
         </ul>
     {% endblock %}

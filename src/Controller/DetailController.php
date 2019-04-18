@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Entity\Personne;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DetailController extends AbstractController
@@ -16,27 +17,16 @@ class DetailController extends AbstractController
      */
     public function liste()
     {
-        // Récupération du Repository
         $repository = $this->getDoctrine()->getRepository(Personne::class);
-        // Récupération des articles
         $personnes = $repository->findAll();
         return $this->render('liste.html.twig', [
             'personnes' => $personnes
         ]);
     }
-    /**
-     * @Route("/article/{id}", name="article_show")
-     */
-    public function show($id)
+
+    public function detail(): Response
     {
-        // Récupération du Repository
-        $repository = $this->getDoctrine()->getRepository(Article::class);
-        // Récupération de l'article lié à l'id
-        $article = $repository->findOneBy([
-            'id' => $id
-        ]);
-        return $this->render('article/show.html.twig', [
-            'article' => $article
-        ]);
+        return $this->render('show.html.twig');
     }
 }
+
