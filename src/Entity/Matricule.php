@@ -21,6 +21,11 @@ class Matricule
      */
     private $number;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Personne", mappedBy="matricule", cascade={"persist", "remove"})
+     */
+    private $personne;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -36,6 +41,29 @@ class Matricule
         $this->number = $number;
 
         return $this;
+    }
+
+    public function getPersonne(): ?Personne
+    {
+        return $this->personne;
+    }
+
+    public function setPersonne(?Personne $personne): self
+    {
+        $this->personne = $personne;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newMatricule = $personne === null ? null : $this;
+        if ($newMatricule !== $personne->getMatricule()) {
+            $personne->setMatricule($newMatricule);
+        }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->number;
     }
 
 }

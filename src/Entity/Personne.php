@@ -38,10 +38,6 @@ class Personne
      */
     private $user;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Matricule", cascade={"persist", "remove"})
-     */
-    private $matricule;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Place", inversedBy="personnes")
@@ -52,6 +48,11 @@ class Personne
      * @ORM\ManyToOne(targetEntity="App\Entity\Association", inversedBy="personnes")
      */
     private $avoir;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Matricule", inversedBy="personne", cascade={"persist", "remove"})
+     */
+    private $matricule;
 
     public function __construct()
     {
@@ -118,17 +119,6 @@ class Personne
         return $this;
     }
 
-    public function getMatricule(): ?Matricule
-    {
-        return $this->matricule;
-    }
-
-    public function setMatricule(?Matricule $matricule): self
-    {
-        $this->matricule = $matricule;
-
-        return $this;
-    }
 
     /**
      * @return Collection|Place[]
@@ -164,6 +154,18 @@ class Personne
     public function setAvoir(?Association $avoir): self
     {
         $this->avoir = $avoir;
+
+        return $this;
+    }
+
+    public function getMatricule(): ?Matricule
+    {
+        return $this->matricule;
+    }
+
+    public function setMatricule(?Matricule $matricule): self
+    {
+        $this->matricule = $matricule;
 
         return $this;
     }

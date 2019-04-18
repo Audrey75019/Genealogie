@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Matricule;
+use App\Entity\Personne;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -17,6 +18,15 @@ class MatriculeRepository extends ServiceEntityRepository
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Matricule::class);
+    }
+    public function findPeoples(Personne $personne)
+    {
+        return $this->createQueryBuilder('m')
+            ->join('m.personne', 'p')
+            ->where('p.firstname LIKE :firstname')
+            ->setParameter('firstname', '%'.$personne->getFirstname().'%')
+            ->getQuery()
+            ->getResult();
     }
 
     // /**

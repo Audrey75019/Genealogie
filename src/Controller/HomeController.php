@@ -3,8 +3,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Matricule;
 use App\Entity\Personne;
 use App\Entity\PropertySearch;
+use App\Form\MatriculeType;
+use App\Form\PersonneType;
 use App\Form\PropertySearchType;
 use App\Form\RechercheType;
 use App\Repository\PersonneRepository;
@@ -84,14 +87,21 @@ class HomeController extends AbstractController
      */
     public function rechercherAncetre(Request $request): Response
     {
-        $search = new PropertySearch();
-        $form = $this->createForm(PropertySearchType::class, $search);
+        $personne = new Personne();
+        $form = $this->createForm(PersonneType::class, $personne);
+        //dump('ici');
         $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            dump('la');
+            $personnes =  $this->getDoctrine()
+                ->getRepository(Personne::class)
+                ->findPeoples($personne);
+            dump($personnes);
 
 
-        return $this->render('/rechercher-ancetre.html.twig', [
-            'form'=>$form->createView()
-        ]);
+        }
+        return $this->render('rechercher-ancetre.html.twig', [
+            'form' => $form->createView(), 'resultat' => $personnes]);
     }
     /**
      * @param int $id
@@ -100,36 +110,51 @@ class HomeController extends AbstractController
      */
     public function rechercherEsclave(Request $request): Response
     {
-        $search = new PropertySearch();
-        $form = $this->createForm(PropertySearchType::class, $search);
+        $personnes = [];
+        $personne = new Personne();
+        $form = $this->createForm(MatriculeType::class, $personne);
         $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            //dump('la');
+            $personnes =  $this->getDoctrine()
+                ->getRepository(Matricule::class)
+                ->findPeoples($personne);
+            dump($personnes);
+        }
+        return $this->render('rechercher-ancetre.html.twig', [
+            'form' => $form->createView(), 'resultat' => $personnes]);
 
-
-        return $this->render('/rechercher-esclave.html.twig');
     }
     /**
      * @Route("/rechercher/rechercher-sepulture")
      * @return Response
      */
-    public function rechercherSepulture(): Response
+    public function rechercherSepulture(Request $request): Response
     {
-        return $this->render('/rechercher-sepulture.html.twig');
+
     }
     /**
      * @Route("/rechercher/rechercher-monument")
      * @return Response
      */
-    public function rechercherMonument(): Response
+    public function rechercherMonument(Request $request): Response
     {
-        return $this->render('/rechercher-monument.html.twig');
+
     }
     /**
      * @Route("/rechercher/rechercher-soldat")
      * @return Response
      */
-    public function rechercherSoldat(): Response
+    public function rechercherSoldat(Request $request): Response
     {
-        return $this->render('/rechercher-soldat.html.twig');
+        $search = new PropertySearch();
+        $form = $this->createForm(PropertySearchType::class, $search);
+        $form->handleRequest($request);
+
+
+        return $this->render('/rechercher-soldat.html.twig', [
+            'form'=>$form->createView()
+        ]);
     }
 
     /**

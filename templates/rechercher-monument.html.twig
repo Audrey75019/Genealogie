@@ -6,5 +6,12 @@
 
 {% block body %}
 <h1>rechercher monument aux morts</h1>
+    <div class="jumbotron">
+        <div class="container">
+            {{ form_start(form) }}
+            <input type="submit" value="Rechercher" class="btn btn-outline-primary">
+            {{ form_end(form) }}
+        </div>
+    </div>
 {% endblock %}
 

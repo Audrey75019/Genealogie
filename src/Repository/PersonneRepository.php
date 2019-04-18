@@ -18,6 +18,14 @@ class PersonneRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Personne::class);
     }
+    public function findPeoples(Personne $personne)
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.firstname LIKE :firstname')
+            ->setParameter('firstname', '%'.$personne->getFirstname().'%')
+            ->getQuery()
+            ->getResult();
+    }
 
     // /**
     //  * @return Personne[] Returns an array of Personne objects

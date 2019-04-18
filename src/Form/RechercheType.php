@@ -15,10 +15,6 @@ class RechercheType extends AbstractType
             ->add('name')
             ->add('firstname')
             ->add('profession')
-            ->add('user')
-            ->add('matricule')
-            ->add('passe')
-            ->add('avoir')
         ;
     }
 

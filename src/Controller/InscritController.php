@@ -40,7 +40,7 @@ class InscritController extends AbstractController
             $manager->flush();
             $this->addFlash('success', 'Votre ancêtre a bien été ajouté');
             return $this->redirectToRoute('app_inscrit_create', [
-                'id' => $personne->getId()
+                'personne' => $personne->getId()
             ]);
         }
         return $this->render('/inscrit/formulaire-personne.html.twig', [

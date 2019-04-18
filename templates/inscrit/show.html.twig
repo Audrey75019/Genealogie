@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail de l'ancêtre{% endblock %}
+
+
+{% block body %}
+
+<h1>Détails</h1>
+    <h1>{{ personne.name }}</h1>
+    <p>{{ personne.firstname }}{{ personne.profession }}</p>
+    <a href="{{ path('app_detail_liste') }}">Retour à la liste</a>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+

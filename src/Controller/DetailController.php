@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Entity\Personne;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -24,9 +25,18 @@ class DetailController extends AbstractController
         ]);
     }
 
-    public function detail(): Response
+    /**
+     * @Route("/inscrit/details-ancetre/{id}", methods={"GET", "POST"})
+     * @return Response
+     */
+    public function detail(Personne $personne, Request $request): Response
     {
-        return $this->render('show.html.twig');
+
+        return $this->render('inscrit/show.html.twig', [
+            'personne' => $personne
+        ]);
     }
+
 }
+
 
