@@ -14,7 +14,6 @@ class SepultureType extends AbstractType
         $builder
             ->add('name')
             ->add('firstname')
-            ->add('profession')
         ;
     }
 

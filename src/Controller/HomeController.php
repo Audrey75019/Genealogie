@@ -6,10 +6,12 @@ namespace App\Controller;
 use App\Entity\Matricule;
 use App\Entity\Personne;
 use App\Entity\PropertySearch;
+use App\Entity\Sepulture;
 use App\Form\MatriculeType;
 use App\Form\PersonneType;
 use App\Form\PropertySearchType;
 use App\Form\RechercheType;
+use App\Form\SepultureType;
 use App\Repository\PersonneRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -131,7 +133,19 @@ class HomeController extends AbstractController
      */
     public function rechercherSepulture(Request $request): Response
     {
-
+        $personnes = [];
+        $personne = new Personne();
+        $form = $this->createForm(SepultureType::class, $personne);
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            //dump('la');
+            $personnes =  $this->getDoctrine()
+                ->getRepository(Sepulture::class)
+                ->findPeoples($personne);
+            dump($personnes);
+        }
+        return $this->render('rechercher-ancetre.html.twig', [
+            'form' => $form->createView(), 'resultat' => $personnes]);
     }
     /**
      * @Route("/rechercher/rechercher-monument")
@@ -139,7 +153,7 @@ class HomeController extends AbstractController
      */
     public function rechercherMonument(Request $request): Response
     {
-
+        return $this->render('rechercher-monument.html.twig');
     }
     /**
      * @Route("/rechercher/rechercher-soldat")
@@ -147,14 +161,7 @@ class HomeController extends AbstractController
      */
     public function rechercherSoldat(Request $request): Response
     {
-        $search = new PropertySearch();
-        $form = $this->createForm(PropertySearchType::class, $search);
-        $form->handleRequest($request);
-
-
-        return $this->render('/rechercher-soldat.html.twig', [
-            'form'=>$form->createView()
-        ]);
+        return $this->render('rechercher-soldat.html.twig');
     }
 
     /**
