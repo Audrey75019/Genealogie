@@ -94,16 +94,16 @@ class HomeController extends AbstractController
         //dump('ici');
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
-            dump('la');
+
             $personnes =  $this->getDoctrine()
                 ->getRepository(Personne::class)
                 ->findPeoples($personne);
-            dump($personnes);
+
 
 
         }
-        return $this->render('rechercher-ancetre.html.twig', [
-            'form' => $form->createView(), 'resultat' => $personnes]);
+        return $this->render('/recherche/rechercher-ancetre.html.twig', [
+            'form' => $form->createView(), 'resultat' => $personne]);
     }
     /**
      * @param int $id
@@ -123,7 +123,7 @@ class HomeController extends AbstractController
                 ->findPeoples($personne);
             dump($personnes);
         }
-        return $this->render('rechercher-ancetre.html.twig', [
+        return $this->render('/recherche/rechercher-ancetre.html.twig', [
             'form' => $form->createView(), 'resultat' => $personnes]);
 
     }
@@ -144,7 +144,7 @@ class HomeController extends AbstractController
                 ->findPeoples($personne);
             dump($personnes);
         }
-        return $this->render('rechercher-ancetre.html.twig', [
+        return $this->render('/recherche/rechercher-ancetre.html.twig', [
             'form' => $form->createView(), 'resultat' => $personnes]);
     }
     /**
@@ -153,7 +153,19 @@ class HomeController extends AbstractController
      */
     public function rechercherMonument(Request $request): Response
     {
-        return $this->render('rechercher-monument.html.twig');
+        $personnes = [];
+        $personne = new Personne();
+        $form = $this->createForm(SepultureType::class, $personne);
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            //dump('la');
+            $personnes =  $this->getDoctrine()
+                ->getRepository(Sepulture::class)
+                ->findPeoples($personne);
+            dump($personnes);
+        }
+        return $this->render('/recherche/rechercher-monument.html.twig', [
+            'form' => $form->createView(), 'resultat' => $personnes]);
     }
     /**
      * @Route("/rechercher/rechercher-soldat")
@@ -161,36 +173,20 @@ class HomeController extends AbstractController
      */
     public function rechercherSoldat(Request $request): Response
     {
-        return $this->render('rechercher-soldat.html.twig');
+        $personnes = [];
+        $personne = new Personne();
+        $form = $this->createForm(SepultureType::class, $personne);
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            //dump('la');
+            $personnes =  $this->getDoctrine()
+                ->getRepository(Sepulture::class)
+                ->findPeoples($personne);
+            dump($personnes);
+        }
+        return $this->render('/recherche/rechercher-soldat.html.twig', [
+            'form' => $form->createView(), 'resultat' => $personnes]);
     }
-
-    /**
-     * @Route("/monarbre/creer-arbre")
-     * @return Response
-     */
-    public function creerArbre(): Response
-    {
-        return $this->render('/creer-arbre.html.twig');
-    }
-
-    /**
-     * @Route("/monarbre/modifier-arbre")
-     * @return Response
-     */
-    public function modifierArbre(): Response
-    {
-        return $this->render('/modifier-arbre.html.twig');
-    }
-
-    /**
-     * @Route("/forum")
-     * @return Response
-     */
-    public function forum(): Response
-    {
-        return $this->render('/forum.html.twig');
-    }
-
     /**
      * @Route("/entraide")
      * @return Response

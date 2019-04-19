@@ -6,5 +6,43 @@
 
 {% block body %}
 <h1>Creer Arbre</h1>
+    <h1>Formulaire de création de personne</h1>
+    <div class="vous">
+    <h2>Vous</h2>
+    {{ form_start(createForm) }}
+    {{ form_widget(createForm) }}
+    <input type="submit" value="Créer" class="btn btn-outline-primary">
+    {{ form_end(createForm) }}
+
+</div>
+<div class="pere">
+    <h2>Votre père</h2>
+    {{ form_start(createForm2) }}
+    {{ form_widget(createForm2) }}
+    <input type="submit" value="Créer" class="btn btn-outline-primary">
+    {{ form_end(createForm2) }}
+
+</div>
+        <div class="mere">
+            <h2>Votre mère</h2>
+    {{ form_start(createForm3) }}
+    {{ form_widget(createForm3) }}
+    <input type="submit" value="Créer" class="btn btn-outline-primary">
+    {{ form_end(createForm3) }}
+        </div>
+    <div class="gpere">
+        <h2>Ses Parents</h2>
+        {{ form_start(createForm4) }}
+        {{ form_widget(createForm4) }}
+        <input type="submit" value="Créer" class="btn btn-outline-primary">
+        {{ form_end(createForm4) }}
+        <div class="gmere">
+            <h2>Ses Parents</h2>
+            {{ form_start(createForm5) }}
+            {{ form_widget(createForm5) }}
+            <input type="submit" value="Créer" class="btn btn-outline-primary">
+            {{ form_end(createForm5) }}
+        </div>
+    </div>
 {% endblock %}
 

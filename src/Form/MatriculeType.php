@@ -12,10 +12,8 @@ class MatriculeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', ['required' => false
-            ])
-            ->add('firstname', ['required' => false
-            ])
+            ->add('name')
+            ->add('firstname')
         ;
     }
 

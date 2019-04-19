@@ -54,9 +54,15 @@ class Personne
      */
     private $matricule;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Monument", inversedBy="personnes")
+     */
+    private $monument;
+
     public function __construct()
     {
         $this->passe = new ArrayCollection();
+        $this->monument = new ArrayCollection();
     }
     /**
      * @return mixed
@@ -166,6 +172,32 @@ class Personne
     public function setMatricule(?Matricule $matricule): self
     {
         $this->matricule = $matricule;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Monument[]
+     */
+    public function getMonument(): Collection
+    {
+        return $this->monument;
+    }
+
+    public function addMonument(Monument $monument): self
+    {
+        if (!$this->monument->contains($monument)) {
+            $this->monument[] = $monument;
+        }
+
+        return $this;
+    }
+
+    public function removeMonument(Monument $monument): self
+    {
+        if ($this->monument->contains($monument)) {
+            $this->monument->removeElement($monument);
+        }
 
         return $this;
     }

@@ -1,18 +1,37 @@
-.navbar {
-    background-color: #597a92;
-}
-/*
+
+
 body {
     background-color: #4b4d50;
     color: white;
-}*/
+    background-image:url(https://unsplash.com/photos/z5hrJtzMlpw);
+    background-repeat:no-repeat;
+}
 
 .btn-link {
-    color: white;
+    color: black;
     padding: 0;
 }
 
-img {
-    max-width: 100%;
-    height: auto;
+.mere{
+    position: relative;
+    left: 300px;
+    top: 50px;
+}
+.pere{
+    position: relative;
+    left: 300px;
+    top: -100px;
+}
+.vous{
+    position: relative;
+    top: 200px;
+}
+.gpere{
+    position: relative;
+    top: -550px;
+    left: 600px;
+}
+.gmere{
+    position: relative;
+    top: 0px;
 }

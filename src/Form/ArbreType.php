@@ -7,17 +7,15 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class RechercheType extends AbstractType
+class ArbreType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', ['required' => false
-            ])
-            ->add('firstname', ['required' => false
-            ])
-            ->add('profession', ['required' => false
-            ])
+            ->add('name')
+            ->add('firstname')
+            ->add('profession')
+            ->add('user')
         ;
     }
 

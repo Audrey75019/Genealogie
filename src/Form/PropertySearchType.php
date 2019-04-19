@@ -15,7 +15,8 @@ class PropertySearchType extends AbstractType
     {
         $builder
             ->add('name', IntegerType::class,[ 'required'=>false])
-            ->add('firstname')
+            ->add('firstname', ['required' => false
+            ])
         ;
     }
 

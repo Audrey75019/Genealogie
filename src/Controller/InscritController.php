@@ -47,7 +47,6 @@ class InscritController extends AbstractController
             'createForm' => $form->createView()
         ]);
     }
-
     /**
      * @Route("/inscrit/connecte")
      * @return Response
@@ -56,4 +55,47 @@ class InscritController extends AbstractController
     {
         return $this->render('/inscrit/connecte.html.twig');
     }
+    /**
+     * @Route("/monarbre/creer-arbre")
+     * @return Response
+     */
+    public function creerArbre(Request $request): Response
+    {
+        $personne = new Personne();
+        $form = $this->createForm(PersonneType::class, $personne);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($personne);
+            return $this->redirectToRoute('app_inscrit_creerarbre', [
+                'personne' => $personne->getId()
+            ]);
+        }
+        return $this->render('/creer-arbre.html.twig', [
+            'createForm' => $form->createView(),
+            'createForm2' => $form->createView(),
+            'createForm3' => $form->createView(),
+            'createForm4' => $form->createView(),
+            'createForm5' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/monarbre/modifier-arbre")
+     * @return Response
+     */
+    public function modifierArbre(): Response
+    {
+        return $this->render('/modifier-arbre.html.twig');
+    }
+
+    /**
+     * @Route("/forum")
+     * @return Response
+     */
+    public function forum(): Response
+    {
+        return $this->render('/forum.html.twig');
+    }
+
 }
